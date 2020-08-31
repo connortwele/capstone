@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Attractions from './components/attractions'
 import singleAttraction from './components/singleAttraction'
+import addAttraction from './components/addAttraction'
 
 import Navbar from "./components/navbar"
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" exact/>
         <Route path="/attractions" exact component={Attractions} />
         <Route path="/attractions/:id" exact component={singleAttraction} />
+        <Route path="/add" exact component={addAttraction} />
 
       </div>
     </Router>

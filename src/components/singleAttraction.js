@@ -3,10 +3,14 @@ import axios from "axios";
 export default class EditAttraction extends Component {
   constructor(props){
     super(props)
-    // this.onChangeUsername = this.onChangeUsername.bind(this);
+    // this.onChangeName = this.onChangeName.bind(this);
     // this.onChangeDescription = this.onChangeDescription.bind(this);
-    // this.onChangeDuration = this.onChangeDuration.bind(this);
-    // this.onChangeDate = this.onChangeDate.bind(this);
+    // this.onChangeWebsite = this.onChangeWebsite.bind(this);
+    // this.onChangeImageURL = this.onChangeImageURL.bind(this);
+    // this.onChangeAddress = this.onChangeAddress.bind(this);
+    // this.onChangeCity = this.onChangeCity.bind(this);
+    // this.onChangeState = this.onChangeState.bind(this);
+    // this.onChangeZipcode = this.onChangeZipcode.bind(this);
     // this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       name: "",
@@ -19,8 +23,8 @@ export default class EditAttraction extends Component {
         state:"",
         zipcode:""
       },
-      indoors: null,
-      kidFriendly: null
+      indoors: false,
+      kidFriendly: false
     }
   }
   componentDidMount() {
@@ -30,15 +34,15 @@ export default class EditAttraction extends Component {
         name: response.data.name,
         description: response.data.description,
         website: response.data.website,
-        //imageURL:response.data.imageURL,
+        imageURL:response.data['image url'],
         location: {
           address: response.data.location.address,
           city: response.data.location.city,
           state:response.data.location.state,
-          zipcode: response.data.location.zipcode
+          zipcode: response.data.location['zip code']
         },
-        // indoors: response.data.indoors,
-        // kidFriendly: response.data.kidFriendly
+        indoors: response.data.indoors,
+        kidFriendly: response.data['family friendly']
       })
     })
     .catch((error)=>{
@@ -46,108 +50,27 @@ export default class EditAttraction extends Component {
     })
     console.log(this.state.name)
   }
-
-// begin form functions: onChange and onSubmit
-
-// onChangeUsername(e){
-//   this.setState({
-//     username: e.target.value
-//   })
-// }
-
-// onChangeDescription(e){
-//   this.setState({
-//     description: e.target.value
-//   })
-// }
-
-// onChangeDuration(e){
-//   this.setState({
-//     duration: e.target.value
-//   })
-// }
-
-// onChangeDate(date){
-//   this.setState({
-//     date: date
-//   })
-// }
-
-// onSubmit(e){
-//   e.preventDefault();
-//   const Attraction = {
-//     username : this.state.username,
-//     description: this.state.description,
-//     duration: this.state.duration,
-//     date: this.state.date
-//   }
-//   console.log(Attraction)
-
-//   axios.post('http://localhost:5000/Attractions/update' + this.props.match.params.id, Attraction)
-//     .then((res)=>{
-//       console.log(res.data)
-//     }).catch((err)=>{console.log(err)})
-//     window.location="/"
-// }
-
-//end form funtions
   render() {
     return (
       <div>
+          <img src={this.state.imageURL} alt=""/>
+          <br/>
           {this.state.name}
-        {/* <h3>Edit Attraction Log</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label >Username: </label>
-            <select 
-              ref="userInput"
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
-            >
-              {this.state.users.map((user)=>{
-                return (
-                  <option key={user} value={user}>
-                    {user}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-          <div className="form-group">
-            <label >Description:</label>
-            <input
-            type="text"
-            required
-            className="form-control"
-            value={this.state.description}
-            onChange={this.onChangeDescription}/>
-          </div>
-          <div className="form-group">
-            <label>Duration(in minutes):</label>
-              <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.duration}
-              onChange={this.onChangeDuration}
-              />
-          </div>
-          <div className="form-group">
-              <label>Date:</label>
-              <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
-              />
-          </div>
-          <div className="form-group">
-            <input
-            type="submit"
-            value="edit Attraction Log"
-            className= "btn btn-primary"
-            /> */}
-          {/* </div>
-        </form> */}
+          <br/>
+          {this.state.description}
+          <br/>
+          <a href={this.state.website}>Website</a>
+          <br/>
+          {this.state.location.address}
+          <br/>
+          {this.state.location.city}
+          <br/>
+          {this.state.location.state}
+          <br/>
+          {this.state.location.zipcode}
+          <p>Family Friendly?</p>
+          <br/>
+          {this.state.kidFriendly}
       </div>
     )
   }

@@ -2,6 +2,25 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
+const locationSchema = new Schema({
+    address: {
+        type: String,
+        required: true
+    },
+    city:{
+        type: String,
+        required: true
+    },
+    state:{
+        type: String,
+        required: true
+    },
+    zipcode:{
+        type: String,
+        required:true
+    }
+})
+
 const attractionSchema = new Schema({
     name:{
         type: String,
@@ -20,28 +39,15 @@ const attractionSchema = new Schema({
         required: true
     },
     location:{
-        address: {
-            type: String,
-            required: true
-        },
-        city:{
-            type: String,
-            required: true
-        },
-        state:{
-            type: String,
-            required: true
-        },
-        zipcode:{
-            type: String,
-            required:true
-        }
+        type: locationSchema,
+        required: true
+
     },
     indoors:{
         type: Boolean,
         required: true
     },
-    familyFriendly:{
+    kidFriendly:{
         type: Boolean,
         required: true
     }
