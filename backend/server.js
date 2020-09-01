@@ -19,12 +19,14 @@ connection.once('open',()=>{
 
 
 const attractionsRouter = require('./routes/attractions')
-
+const contactsRouter = require('./routes/contacts')
 // app.get('/', function (req, res) {
 //     res.render('index.html', {});
 //   });
 
 app.use('/attractions', attractionsRouter)
+app.use('/contact', contactsRouter)
+
 
 // app.get('/attractions', function (req, res) {
 //     res.render(__dirname+ '/routes/attractions')

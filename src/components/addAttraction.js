@@ -31,8 +31,6 @@ export default class addAttraction extends Component {
         },
         indoors: 0,
         kidFriendly: 0
-        // true: true,
-        // false: false
       }
     }
   
@@ -132,7 +130,8 @@ export default class addAttraction extends Component {
     .then((res)=>{
       console.log(res.data)
     })
-    // window.location="/"
+    window.alert('Thank you for your contribution')
+    window.location="/attractions"
 
     console.log(attraction)
 

@@ -40,18 +40,10 @@ export default class ExercisesList extends Component {
         console.log(error)
       })
   }
-//   deleteExercise(id) {  
-//     axios.delete('http://localhost:5000/exercises/'+id)  
-//     .then(res => console.log(res.data)); 
-//   //   this.setState({  
-//   //   exercises: this.state.exercises.filter(exercise => exercise._id !== id)  
-//   // })  
-// }
   exerciseList(){
     return this.state.attractions.map((currentAttraction) =>{
       return <Attraction 
         attraction = {currentAttraction}
-        // deleteAttraction ={this.deleteAttraction}
         key={currentAttraction._id}
       />
     })

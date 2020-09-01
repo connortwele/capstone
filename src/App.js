@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Attractions from './components/attractions'
 import singleAttraction from './components/singleAttraction'
 import addAttraction from './components/addAttraction'
+import contact from './components/contact'
 
 import Navbar from "./components/navbar"
 
@@ -17,6 +18,8 @@ function App() {
         <Route path="/attractions" exact component={Attractions} />
         <Route path="/attractions/:id" exact component={singleAttraction} />
         <Route path="/add" exact component={addAttraction} />
+        <Route path="/contact" component={contact} />
+
 
       </div>
     </Router>

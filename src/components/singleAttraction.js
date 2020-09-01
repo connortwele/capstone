@@ -3,15 +3,6 @@ import axios from "axios";
 export default class EditAttraction extends Component {
   constructor(props){
     super(props)
-    // this.onChangeName = this.onChangeName.bind(this);
-    // this.onChangeDescription = this.onChangeDescription.bind(this);
-    // this.onChangeWebsite = this.onChangeWebsite.bind(this);
-    // this.onChangeImageURL = this.onChangeImageURL.bind(this);
-    // this.onChangeAddress = this.onChangeAddress.bind(this);
-    // this.onChangeCity = this.onChangeCity.bind(this);
-    // this.onChangeState = this.onChangeState.bind(this);
-    // this.onChangeZipcode = this.onChangeZipcode.bind(this);
-    // this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       name: "",
       description: "",
@@ -24,7 +15,7 @@ export default class EditAttraction extends Component {
         zipcode:""
       },
       indoors: false,
-      kidFriendly: false
+      kidFriendly: false,
     }
   }
   componentDidMount() {
@@ -34,15 +25,15 @@ export default class EditAttraction extends Component {
         name: response.data.name,
         description: response.data.description,
         website: response.data.website,
-        imageURL:response.data['image url'],
+        imageURL:response.data.imageURL,
         location: {
           address: response.data.location.address,
           city: response.data.location.city,
           state:response.data.location.state,
-          zipcode: response.data.location['zip code']
+          zipcode: response.data.location.zipcode
         },
-        indoors: response.data.indoors,
-        kidFriendly: response.data['family friendly']
+        indoors: response.data.indoors.toString(),
+        kidFriendly: response.data.kidFriendly.toString(),
       })
     })
     .catch((error)=>{
@@ -68,9 +59,13 @@ export default class EditAttraction extends Component {
           {this.state.location.state}
           <br/>
           {this.state.location.zipcode}
+          <br/>
+          <p>Indoors?</p>
+          {this.state.indoors}
           <p>Family Friendly?</p>
           <br/>
           {this.state.kidFriendly}
+          <br/>
       </div>
     )
   }
