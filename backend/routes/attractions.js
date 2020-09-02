@@ -11,6 +11,7 @@ router.route('/').get((req,res)=>{
     })
 })
 
+
 router.route('/:id').get((req,res)=>{
     Attraction.findById(req.params.id)
     .then((exercise)=>{
@@ -18,6 +19,29 @@ router.route('/:id').get((req,res)=>{
     }).catch((err)=>{
         res.status(400).json('Error: ' + err)
     })
+}).put((req,res)=>{
+    Attraction.findById(req.params.id)
+        .then((attraction)=>{
+            attraction.name = req.body.name
+            attraction.description = req.body.description
+            attraction.website = req.body.website
+            attraction.imageURL = req.body.imageURL
+            attraction.address = req.body.location.address
+            attraction.city = req.body.location.city
+            attraction.state = req.body.location.state
+            attraction.zipcode = req.body.location.zipcode
+            attraction.indoors = req.body.indoors
+            attraction.kidFriendly = req.body.kidFriendly
+            attraction.likes = req.body.likes
+                .save()
+                .then(()=>res.json('Likes Updated'))
+                .catch((err)=>{
+                    res.status(400).json('Error: ' + err)
+                })
+        })
+        .catch((err)=>{
+            res.status(400).json('Error: ' + err)
+        })
 })
 
 router.route('/add').post((req,res)=>{
@@ -31,6 +55,7 @@ router.route('/add').post((req,res)=>{
             const zipcode = req.body.location.zipcode
             const indoors = req.body.indoors
             const kidFriendly = req.body.kidFriendly
+            const likes = req.body.likes
 
             const newAttraction = new Attraction ({
                 name,
@@ -44,7 +69,8 @@ router.route('/add').post((req,res)=>{
                 zipcode
                 },
                 indoors,
-                kidFriendly
+                kidFriendly,
+                likes
             })
             newAttraction.save()
             .then(()=>{
@@ -54,6 +80,31 @@ router.route('/add').post((req,res)=>{
                     res.status(400).json("Error: " + err)
                 })
 })
+
+// router.route('/:id').put((req,res)=>{
+//     Attraction.findById(req.params.id)
+//         .then((attraction)=>{
+//             attraction.name = req.body.name
+//             attraction.description = req.body.description
+//             attraction.website = req.body.website
+//             attraction.imageURL = req.body.imageURL
+//             attraction.address = req.body.location.address
+//             attraction.city = req.body.location.city
+//             attraction.state = req.body.location.state
+//             attraction.zipcode = req.body.location.zipcode
+//             attraction.indoors = req.body.indoors
+//             attraction.kidFriendly = req.body.kidFriendly
+//             attraction.likes = req.body.likes
+//                 .save()
+//                 .then(()=>res.json('Likes Updated'))
+//                 .catch((err)=>{
+//                     res.status(400).json('Error: ' + err)
+//                 })
+//         })
+//         .catch((err)=>{
+//             res.status(400).json('Error: ' + err)
+//         })
+// })
 
 
 

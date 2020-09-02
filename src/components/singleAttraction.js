@@ -3,6 +3,10 @@ import axios from "axios";
 export default class EditAttraction extends Component {
   constructor(props){
     super(props)
+
+    this.onClickLike = this.onClickLike.bind(this);
+
+
     this.state = {
       name: "",
       description: "",
@@ -16,6 +20,7 @@ export default class EditAttraction extends Component {
       },
       indoors: false,
       kidFriendly: false,
+      likes: 0
     }
   }
   componentDidMount() {
@@ -34,6 +39,7 @@ export default class EditAttraction extends Component {
         },
         indoors: response.data.indoors.toString(),
         kidFriendly: response.data.kidFriendly.toString(),
+        likes: response.data.likes
       })
     })
     .catch((error)=>{
@@ -41,6 +47,41 @@ export default class EditAttraction extends Component {
     })
     console.log(this.state.name)
   }
+
+  onClickLike(e){
+    let currentLikesString = this.state.likes
+    let currentLikes = parseInt(currentLikesString)
+    let newLikes = currentLikes + parseInt(e.target.value)
+    let newLikesString = newLikes.toString()
+    this.setState({
+      likes: newLikesString
+    })
+    const attraction = {
+      name: this.state.name,
+      description: this.state.description,
+      website: this.state.website,
+      imageURL: this.state.imageURL,
+      location: this.state.location,
+      
+          address: this.state.location.address,
+          city: this.state.location.city,
+          state: this.state.location.state,
+          zipcode: this.state.location.zipcode
+      ,
+      indoors: this.state.indoors,
+      kidFriendly: this.state.kidFriendly,
+      likes: this.state.likes
+    }
+
+    axios.put('http://localhost:5000/attractions/' + this.props.match.params.id, attraction)
+    .then((res)=>{
+      console.log(res.data)
+    }).catch((err)=>{console.log(err)})
+    // window.location="/"
+}
+
+  
+
   render() {
     return (
       <div>
@@ -66,6 +107,9 @@ export default class EditAttraction extends Component {
           <br/>
           {this.state.kidFriendly}
           <br/>
+          {this.state.likes}
+          <br/>
+          <button id="likeButton" onClick={this.onClickLike} value="1">Like</button>
       </div>
     )
   }

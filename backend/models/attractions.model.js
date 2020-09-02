@@ -50,6 +50,10 @@ const attractionSchema = new Schema({
     kidFriendly:{
         type: Boolean,
         required: true
+    },
+    likes:{
+        type: String,
+        required: false
     }
 })
 

@@ -30,7 +30,8 @@ export default class addAttraction extends Component {
           zipcode:""
         },
         indoors: 0,
-        kidFriendly: 0
+        kidFriendly: 0,
+        likes: 1
       }
     }
   
@@ -122,7 +123,8 @@ export default class addAttraction extends Component {
           zipcode: this.state.location.zipcode
       ,
       indoors: this.state.indoors,
-      kidFriendly: this.state.kidFriendly
+      kidFriendly: this.state.kidFriendly,
+      likes: this.state.likes
     }
 
     console.log(attraction)
